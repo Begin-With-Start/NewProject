@@ -1,15 +1,20 @@
 package gank.minifly.com.gankgirl.activity_project;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.activity.BaseActivity;
+import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
 
 public class MainActivity extends BaseActivity {
+
+    private TabLayout tabLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +23,43 @@ public class MainActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        init();
     }
 
+    public void init(){
+        tabLayout = (TabLayout) findViewById(R.id.main_tab_all_id);
+        mViewPager = (ViewPager) findViewById(R.id.main_viewpager_id);
 
+
+        // 设置ViewPager的数据等
+        setupViewPager();
+
+        tabLayout.addTab(tabLayout.newTab().setText("tab1"));
+        tabLayout.addTab(tabLayout.newTab().setText("tab2"));
+        tabLayout.addTab(tabLayout.newTab().setText("tab3"));
+
+    }
+
+    //设置viewpager
+    public void setupViewPager(){
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public int getCount() {
+                return 3;
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                return new MainPhotoFragment();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return "标题";
+            }
+        });
+
+
+        tabLayout.setupWithViewPager(mViewPager);
+    }
 }
