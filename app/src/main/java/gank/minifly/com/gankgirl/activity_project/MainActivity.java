@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 import gank.minifly.com.gankgirl.R;
-import gank.minifly.com.gankgirl.activity.BaseActivity;
 import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
 
 public class MainActivity extends BaseActivity {
@@ -33,10 +32,7 @@ public class MainActivity extends BaseActivity {
 
         // 设置ViewPager的数据等
         setupViewPager();
-
-        tabLayout.addTab(tabLayout.newTab().setText("tab1"));
-        tabLayout.addTab(tabLayout.newTab().setText("tab2"));
-        tabLayout.addTab(tabLayout.newTab().setText("tab3"));
+//        tabLayout.addTab(tabLayout.newTab().setText("tab1"));
 
     }
 

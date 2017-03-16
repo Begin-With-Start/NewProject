@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.activity;
+package gank.minifly.com.gankgirl.activity_project;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -1,13 +1,16 @@
 package gank.minifly.com.gankgirl.fragment_project;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import gank.minifly.com.gankgirl.R;
-import gank.minifly.com.gankgirl.fragment.BaseFragment;
+import gank.minifly.com.gankgirl.adapter.PhotoAdapter;
 
 /**
  * author ：minifly
@@ -18,6 +21,8 @@ import gank.minifly.com.gankgirl.fragment.BaseFragment;
 public class MainPhotoFragment extends BaseFragment {
 
     private View view;
+    private Context mContext;
+    private RecyclerView photoFragmentRecyclerview;
 
     @Nullable
     @Override
@@ -27,7 +32,13 @@ public class MainPhotoFragment extends BaseFragment {
         return view;
     }
 
-    public void initView(){
+    public void initView() {
+        mContext = getContext();
 
+        photoFragmentRecyclerview = (RecyclerView) view.findViewById(R.id.photo_fragment_recyclerview);
+
+
+        photoFragmentRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
+        photoFragmentRecyclerview.setAdapter(new PhotoAdapter());
     }
 }
