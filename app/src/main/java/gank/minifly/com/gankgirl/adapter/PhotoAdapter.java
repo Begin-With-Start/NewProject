@@ -9,7 +9,7 @@ import java.util.List;
  * author ：minifly
  * date: 2017/3/13
  * time: 17:01
- * desc: 
+ * desc:
  */
 public class PhotoAdapter extends RecyclerView.Adapter{
     @Override

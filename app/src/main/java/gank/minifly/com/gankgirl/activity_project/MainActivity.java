@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
+import gank.minifly.com.gankgirl.imageloader.ImageloaderEngin;
+import gank.minifly.com.gankgirl.imageloader.ImageloaderPoxyImp;
 
 public class MainActivity extends BaseActivity {
 
