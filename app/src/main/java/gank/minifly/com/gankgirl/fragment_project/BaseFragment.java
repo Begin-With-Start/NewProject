@@ -1,13 +1,19 @@
 package gank.minifly.com.gankgirl.fragment_project;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.RequestQueue;
+
+import gank.minifly.com.gankgirl.tools.ToastUtils;
 
 /**
  * author ：minifly
@@ -17,6 +23,10 @@ import com.yolanda.nohttp.rest.RequestQueue;
  */
 public class BaseFragment extends Fragment {
     public RequestQueue requestQueue = null;
+
+    public ToastUtils toastUtils;
+    public Activity mActivity;
+    public Context mContext;
 
     @Override
     public void onAttach(Context context) {
@@ -45,5 +55,26 @@ public class BaseFragment extends Fragment {
         requestQueue.cancelAll();
         requestQueue = null;
     }
+    public void showToast(String key){
+        toastUtils.showToast(key);
+    }
 
+    public void showDialog(String msg, DialogInterface.OnClickListener sureClickListener, DialogInterface.OnClickListener cancleClickListener){
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setMessage(msg);
+        builder.setPositiveButton("确定", sureClickListener == null ? new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        } : sureClickListener).setPositiveButton("",cancleClickListener==null?new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        }:cancleClickListener);
+
+        Dialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(true);
+    }
 }

@@ -16,7 +16,9 @@ public class MyApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+
         instance = this;
+
         // 初始化NoHttp
         NoHttp.initialize(getApplicationContext());
 

@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gank.minifly.com.gankgirl">
 
+
+    <!-- 允许应用程序联网。 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 获取用户设备的mac地址，在平板设备上，无法通过imei标示设备 -->
+    <uses-permission android:name="android.permission.ACCESS_ALL_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_ALL_EXTERNAL_STORAGE"/>
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -12,7 +21,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity_project.MainActivity"
-            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>

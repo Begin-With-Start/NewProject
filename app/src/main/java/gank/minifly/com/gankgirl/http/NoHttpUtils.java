@@ -72,7 +72,7 @@ public class NoHttpUtils {
         }
 
         request.setConnectTimeout(10 * 1000); // 设置连接超时。
-        request.setReadTimeout(20 * 1000); // 设置读取超时时间，也就是服务器的响应超时。
+        request.setReadTimeout(20 * 1000); // 设置读取超时时间，也就是服务器的响应超时
 
         // 添加请求头
         request.addHeader("Content-Type", "application/json");
