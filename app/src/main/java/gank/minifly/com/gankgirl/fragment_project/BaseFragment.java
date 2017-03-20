@@ -1,7 +1,7 @@
 package gank.minifly.com.gankgirl.fragment_project;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -25,12 +25,13 @@ public class BaseFragment extends Fragment {
     public RequestQueue requestQueue = null;
 
     public ToastUtils toastUtils;
-    public Activity mActivity;
     public Context mContext;
+    private ProgressDialog progressDialog;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mContext = context;
         try {
             requestQueue = NoHttp.newRequestQueue();
         }
@@ -60,7 +61,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void showDialog(String msg, DialogInterface.OnClickListener sureClickListener, DialogInterface.OnClickListener cancleClickListener){
-        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setMessage(msg);
         builder.setPositiveButton("确定", sureClickListener == null ? new DialogInterface.OnClickListener() {
             @Override
@@ -77,4 +78,25 @@ public class BaseFragment extends Fragment {
         Dialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
     }
+
+    // 显示ProgressDialog
+    public void showProgressDialog(String ... text) {
+        if (progressDialog == null || !progressDialog.isShowing()) {
+            progressDialog = new ProgressDialog(mContext);
+            if(text==null){//当参数没有给的时候
+                progressDialog.setMessage("请求中.");
+            }else if(text.length>0){//当给了一个参数的时候.
+                progressDialog.setMessage(text[0]);
+            }
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+    }
+    //隐藏progress
+    public void hideProgressDialog(){
+        if (progressDialog == null || progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
 }

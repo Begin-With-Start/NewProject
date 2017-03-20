@@ -33,7 +33,7 @@ import gank.minifly.com.gankgirl.tools.LogUtils;
  * time: 20:24
  * desc:
  */
-public class MainPhotoFragment extends BaseFragment {
+public class MainOtherFragment extends BaseFragment {
 
     private View view;
     private Context mContext;
@@ -52,7 +52,6 @@ public class MainPhotoFragment extends BaseFragment {
 
         photoFragmentRecyclerview = (RecyclerView) view.findViewById(R.id.photo_fragment_recyclerview);
 
-        request("1");
     }
 
 
@@ -74,7 +73,7 @@ public class MainPhotoFragment extends BaseFragment {
 
         @Override
         public void onSuccess(int what, Response<String> response) {
-            LogUtils.showErrLog("" + response.get());
+            LogUtils.showErrLog("" + response.toString());
             switch (what) {
 
                 case 1:

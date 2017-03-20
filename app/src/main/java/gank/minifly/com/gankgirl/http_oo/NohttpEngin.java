@@ -82,6 +82,7 @@ public class NohttpEngin {
         }catch(Exception e){
             LogUtils.showInfoLog("接口访问错误：" + e.getMessage());
         }
+
         return request;
     }
 }

@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
 import com.yolanda.nohttp.NoHttp;
@@ -17,11 +16,10 @@ import com.yolanda.nohttp.rest.Response;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.bean.ExcepressBean;
 import gank.minifly.com.gankgirl.bean.RequestExpressBean;
+import gank.minifly.com.gankgirl.fragment_project.MainOtherFragment;
 import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
 import gank.minifly.com.gankgirl.http.OnLoadListener;
 import gank.minifly.com.gankgirl.http_oo.NohttpEngin;
-import gank.minifly.com.gankgirl.imageloader.ImageloaderEngin;
-import gank.minifly.com.gankgirl.imageloader.ImageloaderPoxyImp;
 import gank.minifly.com.gankgirl.tools.LogUtils;
 
 public class MainActivity extends BaseActivity {
@@ -46,11 +44,8 @@ public class MainActivity extends BaseActivity {
 
         // 设置ViewPager的数据等
         setupViewPager();
-//        tabLayout.addTab(tabLayout.newTab().setText("tab1"));
 
-        request();
-
-        ImageloaderPoxyImp.getInstance().setLoader(new ImageloaderEngin()).displayImage("",new ImageView(mContext));
+//        ImageloaderPoxyImp.getInstance().setLoader(new ImageloaderEngin()).displayImage("",new ImageView(mContext));
     }
 
     //设置viewpager
@@ -63,7 +58,11 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public Fragment getItem(int position) {
-                return new MainPhotoFragment();
+                if(position==0){
+                    return new MainPhotoFragment();
+                }else{
+                    return new MainOtherFragment();
+                }
             }
 
             @Override
@@ -76,9 +75,6 @@ public class MainActivity extends BaseActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
-    /**
-     * 扫库位码 位置码.
-     */
     public void request() {
         String url = "http://apis.haoservice.com/weather";//type=yunda&postid=3959408859318
 
