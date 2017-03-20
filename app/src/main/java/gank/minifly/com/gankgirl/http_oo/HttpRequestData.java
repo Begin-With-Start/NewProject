@@ -3,7 +3,7 @@ package gank.minifly.com.gankgirl.http_oo;
 /**
  * HTTP访问用RequestData
  */
-public class HttpRequestData extends RequestData {
+public class HttpRequestData implements IRequestData {
 
     /**
      * 请求URL
@@ -12,7 +12,7 @@ public class HttpRequestData extends RequestData {
     
     /**
      * @param requestUrl
-     *            请求URL
+     * 请求URL
      */
     public void setRequestUrl(String requestUrl) {
         this.requestUrl = requestUrl;
