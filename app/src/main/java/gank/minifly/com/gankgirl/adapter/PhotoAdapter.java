@@ -24,15 +24,22 @@ import gank.minifly.com.gankgirl.common.tools.ScreenUtils;
  */
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>{
     private List<FuliResponseBean.ResultsBean> list;
+    private ImageloaderPoxyImp imageloaderPoxyImp;
     private Context mContext;
+    private final int imageWidth;
 
 
     public PhotoAdapter(Context mContext,List<FuliResponseBean.ResultsBean> list){
         this.mContext = mContext;
         this.list = list;
-
+        imageWidth = ScreenUtils.getScreenWidth(mContext)/2;
+        imageloaderPoxyImp = ImageloaderPoxyImp.getInstance();
     }
 
+    public void setList(List<FuliResponseBean.ResultsBean> list){
+        this.list = list;
+        notifyDataSetChanged();
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,9 +50,18 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         FuliResponseBean.ResultsBean bean = list.get(position);
+        if (!bean.getUrl().equals(holder.imageView.getTag())) {
+            holder.imageView.setTag(bean.getUrl());
+            imageloaderPoxyImp.setLoader(new ImageloaderEngin(mContext)).displayImage(bean.getUrl()+"?imageView2/0/w/"+ imageWidth, holder.imageView);
+        }else{
+        }
 
-        ImageloaderPoxyImp.getInstance().setLoader(new ImageloaderEngin()).displayImage(bean.getUrl()+"?imageView2/0/w/"+ ScreenUtils.getScreenWidth(mContext)/2, holder.imageView);
 
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @Override

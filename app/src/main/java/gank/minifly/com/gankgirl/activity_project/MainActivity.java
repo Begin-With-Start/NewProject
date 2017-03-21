@@ -16,13 +16,13 @@ import com.yolanda.nohttp.rest.Response;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.bean.ExcepressBean;
 import gank.minifly.com.gankgirl.bean.RequestExpressBean;
-import gank.minifly.com.gankgirl.fragment_project.MainOtherFragment;
-import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
 import gank.minifly.com.gankgirl.common.http.OnLoadListener;
 import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
 import gank.minifly.com.gankgirl.common.tools.LogUtils;
+import gank.minifly.com.gankgirl.fragment_project.MainOtherFragment;
+import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
@@ -41,12 +41,11 @@ public class MainActivity extends BaseActivity {
         tabLayout = (TabLayout) findViewById(R.id.main_tab_all_id);
         mViewPager = (ViewPager) findViewById(R.id.main_viewpager_id);
 
-
         // 设置ViewPager的数据等
         setupViewPager();
 
-//        ImageloaderPoxyImp.getInstance().setLoader(new ImageloaderEngin()).displayImage("",new ImageView(mContext));
     }
+
 
     //设置viewpager
     public void setupViewPager(){
@@ -67,7 +66,11 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public CharSequence getPageTitle(int position) {
-                return "标题";
+                if(position==0){
+                    return "妹纸图";
+                }else{
+                    return "标题";
+                }
             }
         });
 

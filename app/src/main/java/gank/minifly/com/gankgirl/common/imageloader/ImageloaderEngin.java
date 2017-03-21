@@ -25,10 +25,17 @@ public class ImageloaderEngin implements Imageloader{
     ImageLoader imageLoader = null;
     ImageLoader roundImageLoader = null;
 
+    public ImageloaderEngin(Context mContext){
+        imageLoader = ImageLoader.getInstance();
+        roundImageLoader = ImageLoader.getInstance();
+
+        if (!imageLoader.isInited()) {//初始化之后就不用初始化了
+            initLoader(mContext);
+        }
+    }
+
     @Override
     public void initLoader(Context mContext) {
-
-
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext)
                 // 设置内存缓存大小
                 .threadPriority(Thread.NORM_PRIORITY)
@@ -38,26 +45,18 @@ public class ImageloaderEngin implements Imageloader{
                 .memoryCache(new WeakMemoryCache()).memoryCacheSizePercentage(60)
                 .build();
 
-        imageLoader = ImageLoader.getInstance();
         imageLoader.init(config);
 
-        roundImageLoader = ImageLoader.getInstance();
         roundImageLoader.init(config);
-
-        roundOptions = new DisplayImageOptions.Builder().displayer(new RoundedBitmapDisplayer(8)) // 设置成圆角图片
-                .cacheOnDisk(true) // 设置下载的图片是否缓存在SD卡中
-                .cacheInMemory(true).imageScaleType(ImageScaleType.EXACTLY).build();
-
-        options = new DisplayImageOptions.Builder().cacheOnDisk(true) // 设置下载的图片是否缓存在SD卡中
-                .cacheInMemory(true)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .bitmapConfig(Bitmap.Config.RGB_565).build();
-
     }
 
     @Override
     public void displayImage(String url, ImageView view) {
         try {
+            options = new DisplayImageOptions.Builder().cacheOnDisk(true) // 设置下载的图片是否缓存在SD卡中
+                    .cacheInMemory(true)
+                    .imageScaleType(ImageScaleType.EXACTLY)
+                    .bitmapConfig(Bitmap.Config.RGB_565).build();
             imageLoader.displayImage(url, view, options);
         } catch (Exception e) {
 
@@ -69,6 +68,7 @@ public class ImageloaderEngin implements Imageloader{
     @Override
     public void displayRoundImgPixel(String url, ImageView imgV,int roundPixel) {
         try {
+
             roundOptions = new DisplayImageOptions.Builder().displayer(new RoundedBitmapDisplayer(roundPixel)) // 设置成圆角图片
                     .cacheOnDisk(true) // 设置下载的图片是否缓存在SD卡中
                     .cacheInMemory(true).imageScaleType(ImageScaleType.EXACTLY).build();

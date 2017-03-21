@@ -54,7 +54,7 @@ public class NohttpEngin {
 
                 for (Field field : fields) {
                     field.setAccessible(true);
-                    if (field.get(jsonRequest) != null) {
+                    if (field.get(jsonRequest) != null&& !"serialVersionUID".equals(field.getName())) {//不把serialVersionUID放到请求的参数中.
                         sbUrl.append('&');
                         sbUrl.append(field.getName());
                         sbUrl.append('=');
@@ -74,7 +74,7 @@ public class NohttpEngin {
             request.setReadTimeout(20 * 1000); // 设置读取超时时间，也就是服务器的响应超时。
 
             // 添加请求头
-            request.addHeader("Content-Type", "application/json");
+            request.addHeader("Content-Type", "application/json; charset=utf-8");
             String m = "ANDROID";
             request.addHeader("m", m);
             request.addHeader("v", "1.0.0");

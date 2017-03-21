@@ -3,6 +3,7 @@ package gank.minifly.com.gankgirl;
 import android.app.Application;
 
 import com.yolanda.nohttp.NoHttp;
+
 /**
  * author ：minifly
  * date: 2017/3/10
@@ -21,7 +22,6 @@ public class MyApplication extends Application{
 
         // 初始化NoHttp
         NoHttp.initialize(getApplicationContext());
-
     }
 
     public static MyApplication getApplicationInstance() {
