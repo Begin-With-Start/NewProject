@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package gank.minifly.com.gankgirl.http;
+package gank.minifly.com.gankgirl.common.http;
 
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.download.DownloadQueue;

@@ -13,7 +13,7 @@ import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.RequestQueue;
 
 import gank.minifly.com.gankgirl.R;
-import gank.minifly.com.gankgirl.tools.ToastUtils;
+import gank.minifly.com.gankgirl.common.tools.ToastUtils;
 
 public class BaseActivity extends AppCompatActivity {
     public RequestQueue requestQueue;

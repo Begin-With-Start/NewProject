@@ -17,15 +17,15 @@ import com.yolanda.nohttp.rest.Response;
 
 import java.util.List;
 
-import gank.minifly.com.gankgirl.Constant.UrlConstant;
+import gank.minifly.com.gankgirl.constant.UrlConstant;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.adapter.PhotoAdapter;
 import gank.minifly.com.gankgirl.adapter.SpacesItemDecoration;
 import gank.minifly.com.gankgirl.bean.FuliRequestBean;
 import gank.minifly.com.gankgirl.bean.FuliResponseBean;
-import gank.minifly.com.gankgirl.http.OnLoadListener;
-import gank.minifly.com.gankgirl.http_oo.NohttpEngin;
-import gank.minifly.com.gankgirl.tools.LogUtils;
+import gank.minifly.com.gankgirl.common.http.OnLoadListener;
+import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
+import gank.minifly.com.gankgirl.common.tools.LogUtils;
 
 /**
  * author ：minifly

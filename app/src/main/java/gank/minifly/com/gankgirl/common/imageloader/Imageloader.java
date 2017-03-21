@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.imageloader;
+package gank.minifly.com.gankgirl.common.imageloader;
 
 import android.content.Context;
 import android.widget.ImageView;

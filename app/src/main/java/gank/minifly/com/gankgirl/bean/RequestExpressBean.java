@@ -1,6 +1,6 @@
 package gank.minifly.com.gankgirl.bean;
 
-import gank.minifly.com.gankgirl.http_oo.HttpRequestData;
+import gank.minifly.com.gankgirl.common.http.http_oo.HttpRequestData;
 
 /**
  * author ：minifly

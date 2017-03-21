@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.http;
+package gank.minifly.com.gankgirl.common.http;
 
 import com.alibaba.fastjson.JSON;
 import com.yolanda.nohttp.NoHttp;
@@ -7,7 +7,7 @@ import com.yolanda.nohttp.rest.Request;
 
 import java.util.Map;
 
-import gank.minifly.com.gankgirl.tools.LogUtils;
+import gank.minifly.com.gankgirl.common.tools.LogUtils;
 
 
 /**

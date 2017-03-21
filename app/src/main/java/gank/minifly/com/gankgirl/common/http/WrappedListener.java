@@ -1,13 +1,13 @@
-package gank.minifly.com.gankgirl.http;
+package gank.minifly.com.gankgirl.common.http;
 
 import android.app.Activity;
 
 import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Response;
 
-import gank.minifly.com.gankgirl.tools.JsonUtil;
-import gank.minifly.com.gankgirl.tools.LogUtils;
-import gank.minifly.com.gankgirl.tools.ToastUtils;
+import gank.minifly.com.gankgirl.common.tools.JsonUtil;
+import gank.minifly.com.gankgirl.common.tools.LogUtils;
+import gank.minifly.com.gankgirl.common.tools.ToastUtils;
 
 /**
  * Created by ZFY on 2016/10/19 0019.

@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.tools;
+package gank.minifly.com.gankgirl.common.tools;
 
 import android.app.Activity;
 import android.content.Context;

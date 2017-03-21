@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.http_oo;
+package gank.minifly.com.gankgirl.common.http.http_oo;
 
 /**
  * ResponseData接口

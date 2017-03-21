@@ -11,9 +11,9 @@ import java.util.List;
 
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.bean.FuliResponseBean;
-import gank.minifly.com.gankgirl.imageloader.ImageloaderEngin;
-import gank.minifly.com.gankgirl.imageloader.ImageloaderPoxyImp;
-import gank.minifly.com.gankgirl.tools.ScreenUtils;
+import gank.minifly.com.gankgirl.common.imageloader.ImageloaderEngin;
+import gank.minifly.com.gankgirl.common.imageloader.ImageloaderPoxyImp;
+import gank.minifly.com.gankgirl.common.tools.ScreenUtils;
 
 
 /**

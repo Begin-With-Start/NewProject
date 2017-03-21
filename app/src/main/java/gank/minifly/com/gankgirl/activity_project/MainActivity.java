@@ -18,9 +18,9 @@ import gank.minifly.com.gankgirl.bean.ExcepressBean;
 import gank.minifly.com.gankgirl.bean.RequestExpressBean;
 import gank.minifly.com.gankgirl.fragment_project.MainOtherFragment;
 import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
-import gank.minifly.com.gankgirl.http.OnLoadListener;
-import gank.minifly.com.gankgirl.http_oo.NohttpEngin;
-import gank.minifly.com.gankgirl.tools.LogUtils;
+import gank.minifly.com.gankgirl.common.http.OnLoadListener;
+import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
+import gank.minifly.com.gankgirl.common.tools.LogUtils;
 
 public class MainActivity extends BaseActivity {
 

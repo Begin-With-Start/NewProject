@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.http;
+package gank.minifly.com.gankgirl.common.http;
 
 import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Response;

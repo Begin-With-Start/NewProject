@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.http_oo;
+package gank.minifly.com.gankgirl.common.http.http_oo;
 
 import com.alibaba.fastjson.JSON;
 import com.yolanda.nohttp.NoHttp;
@@ -8,7 +8,7 @@ import com.yolanda.nohttp.rest.Request;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import gank.minifly.com.gankgirl.tools.LogUtils;
+import gank.minifly.com.gankgirl.common.tools.LogUtils;
 
 /**
  * author ：minifly

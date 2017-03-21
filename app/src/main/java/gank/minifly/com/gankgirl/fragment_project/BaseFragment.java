@@ -13,7 +13,7 @@ import android.view.View;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.RequestQueue;
 
-import gank.minifly.com.gankgirl.tools.ToastUtils;
+import gank.minifly.com.gankgirl.common.tools.ToastUtils;
 
 /**
  * author ：minifly

@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.Constant;
+package gank.minifly.com.gankgirl.constant;
 
 /**
  * author ：minifly

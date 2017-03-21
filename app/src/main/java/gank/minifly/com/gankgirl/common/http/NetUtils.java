@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.http;
+package gank.minifly.com.gankgirl.common.http;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
