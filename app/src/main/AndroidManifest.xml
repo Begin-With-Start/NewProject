@@ -37,6 +37,9 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+        <activity android:name=".activity_project.VideoGankViewDetailActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -25,6 +25,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('libs/universal-image-loader-1.9.4-with-sources.jar')
+    compile project(':library')
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     compile 'com.yolanda.nohttp:nohttp:1.1.0'
@@ -32,5 +33,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.54.android'
     compile 'com.android.support:design:25.2.0'
     testCompile 'junit:junit:4.12'
-    compile project(':library')
+    compile project(':jcvideoplayer-lib')
 }

@@ -1,6 +1,5 @@
 package gank.minifly.com.gankgirl.activity_project;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -20,7 +19,7 @@ import gank.minifly.com.gankgirl.common.imageloader.ImageloaderEngin;
 import gank.minifly.com.gankgirl.common.imageloader.ImageloaderPoxyImp;
 import gank.minifly.com.gankgirl.common.tools.ScreenUtils;
 
-public class PhotoGankViewdetailActivity extends Activity {
+public class PhotoGankViewdetailActivity extends BaseActivity {
     private ViewPager myViewPager;
     private TextView countTxt;
     private Context mContext;
