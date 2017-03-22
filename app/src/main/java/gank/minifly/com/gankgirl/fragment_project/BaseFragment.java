@@ -1,9 +1,11 @@
 package gank.minifly.com.gankgirl.fragment_project;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.View;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.RequestQueue;
 
+import gank.minifly.com.gankgirl.common.tools.Common;
 import gank.minifly.com.gankgirl.common.tools.ToastUtils;
 
 /**
@@ -27,10 +30,12 @@ public class BaseFragment extends Fragment {
     public ToastUtils toastUtils;
     public Context mContext;
     private ProgressDialog progressDialog;
+    public Activity mActivity;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mActivity  = getActivity();
         mContext = context;
         try {
             requestQueue = NoHttp.newRequestQueue();
@@ -99,4 +104,14 @@ public class BaseFragment extends Fragment {
         }
     }
 
+    // 打开一个Activity传递一个Bundle
+    public void startActivity(Class<? extends Activity> target, Bundle bundle) {
+        if (Common.getInstance().isNotFastClick()) {
+            Intent intent = new Intent(mActivity, target);
+            if (bundle != null) {
+                intent.putExtras(bundle);
+            }
+            mActivity.startActivity(intent);
+        }
+    }
 }

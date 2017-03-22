@@ -49,7 +49,17 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        FuliResponseBean.ResultsBean bean = list.get(position);
+        final FuliResponseBean.ResultsBean bean = list.get(position);
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(itemOnclicker!= null ){
+                    itemOnclicker.itemOnclick(bean);
+                }
+            }
+        });
+
         if (!bean.getUrl().equals(holder.imageView.getTag())) {
             holder.imageView.setTag(bean.getUrl());
             imageloaderPoxyImp.setLoader(new ImageloaderEngin(mContext)).displayImage(bean.getUrl()+"?imageView2/0/w/"+ imageWidth, holder.imageView);
@@ -82,4 +92,15 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>{
             imageView = (ImageView) itemView.findViewById(R.id.adapter_mainphoto_img);
         }
     }
+
+    public void setItemOnclicker(ItemOnclicker itemOnclicker){
+        this.itemOnclicker = itemOnclicker;
+    }
+    ItemOnclicker itemOnclicker;
+
+    public interface ItemOnclicker{
+        void itemOnclick(FuliResponseBean.ResultsBean bean);
+    }
 }
+
+

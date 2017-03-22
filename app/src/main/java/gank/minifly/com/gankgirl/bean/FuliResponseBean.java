@@ -1,5 +1,8 @@
 package gank.minifly.com.gankgirl.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
  * time: 18:58
  * desc:
  */
-public class FuliResponseBean {
+public class FuliResponseBean implements Parcelable{
 
     /**
      * error : false
@@ -34,7 +37,7 @@ public class FuliResponseBean {
         this.results = results;
     }
 
-    public static class ResultsBean {
+    public static class ResultsBean implements Parcelable{
         /**
          * _id : 58cf3696421aa90f13178695
          * createdAt : 2017-03-20T09:55:34.360Z
@@ -128,5 +131,81 @@ public class FuliResponseBean {
         public void setWho(String who) {
             this.who = who;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this._id);
+            dest.writeString(this.createdAt);
+            dest.writeString(this.desc);
+            dest.writeString(this.publishedAt);
+            dest.writeString(this.source);
+            dest.writeString(this.type);
+            dest.writeString(this.url);
+            dest.writeByte(this.used ? (byte) 1 : (byte) 0);
+            dest.writeString(this.who);
+        }
+
+        public ResultsBean() {
+        }
+
+        protected ResultsBean(Parcel in) {
+            this._id = in.readString();
+            this.createdAt = in.readString();
+            this.desc = in.readString();
+            this.publishedAt = in.readString();
+            this.source = in.readString();
+            this.type = in.readString();
+            this.url = in.readString();
+            this.used = in.readByte() != 0;
+            this.who = in.readString();
+        }
+
+        public static final Creator<ResultsBean> CREATOR = new Creator<ResultsBean>() {
+            @Override
+            public ResultsBean createFromParcel(Parcel source) {
+                return new ResultsBean(source);
+            }
+
+            @Override
+            public ResultsBean[] newArray(int size) {
+                return new ResultsBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.error ? (byte) 1 : (byte) 0);
+        dest.writeTypedList(this.results);
+    }
+
+    public FuliResponseBean() {
+    }
+
+    protected FuliResponseBean(Parcel in) {
+        this.error = in.readByte() != 0;
+        this.results = in.createTypedArrayList(ResultsBean.CREATOR);
+    }
+
+    public static final Creator<FuliResponseBean> CREATOR = new Creator<FuliResponseBean>() {
+        @Override
+        public FuliResponseBean createFromParcel(Parcel source) {
+            return new FuliResponseBean(source);
+        }
+
+        @Override
+        public FuliResponseBean[] newArray(int size) {
+            return new FuliResponseBean[size];
+        }
+    };
 }

@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gank.minifly.com.gankgirl.R;
+import gank.minifly.com.gankgirl.activity_project.PhotoGankViewdetailActivity;
 import gank.minifly.com.gankgirl.adapter.PhotoAdapter;
 import gank.minifly.com.gankgirl.adapter.SpacesItemDecoration;
 import gank.minifly.com.gankgirl.bean.FuliRequestBean;
@@ -86,6 +87,23 @@ public class MainPhotoFragment extends BaseFragment implements View.OnClickListe
         photoFragmentRecyclerview.addItemDecoration(new SpacesItemDecoration(2, 16, true));
 
         adapter = new PhotoAdapter(mContext, currentPhotoList);
+        adapter.setItemOnclicker(new PhotoAdapter.ItemOnclicker() {
+            @Override
+            public void itemOnclick(FuliResponseBean.ResultsBean bean) {
+                Bundle bundle = new Bundle();
+                FuliResponseBean tempBean = new FuliResponseBean();
+                List<FuliResponseBean.ResultsBean> list = tempBean.getResults();
+                if(list==null){
+                    list = new LinkedList<>();
+                }
+                list.add(bean);
+                tempBean.setResults(list);
+
+                bundle.putParcelable("bean",tempBean);
+
+                startActivity(PhotoGankViewdetailActivity.class,bundle);
+            }
+        });
         photoFragmentRecyclerview.setAdapter(adapter);
 
         if(currentPhotoList==null || currentPhotoList.size()==0){
