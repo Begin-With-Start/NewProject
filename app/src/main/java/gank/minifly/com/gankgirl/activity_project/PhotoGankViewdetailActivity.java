@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bm.library.PhotoView;
 
@@ -21,11 +22,13 @@ import gank.minifly.com.gankgirl.common.tools.ScreenUtils;
 
 public class PhotoGankViewdetailActivity extends Activity {
     private ViewPager myViewPager;
+    private TextView countTxt;
     private Context mContext;
     private  FuliResponseBean allBean = new FuliResponseBean();
 
     private int imageWidth;
     private List<FuliResponseBean.ResultsBean> list;
+    private int allCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,9 @@ public class PhotoGankViewdetailActivity extends Activity {
     }
 
     public void initView(){
+        myViewPager = (ViewPager)findViewById(R.id.photo_gank_view_pager);
+        countTxt = (TextView)findViewById(R.id.photo_gank_count_txt);
+
         mContext = this;
         Bundle bundle = getIntent().getExtras();
         if(bundle.containsKey("bean")){
@@ -45,9 +51,28 @@ public class PhotoGankViewdetailActivity extends Activity {
         }
 
         imageWidth = ScreenUtils.getScreenWidth(mContext);
+        allCount = list.size();
+        countTxt.setText("" + 1 +"/" + allCount);
 
-        myViewPager = (ViewPager)findViewById(R.id.photo_gank_view_pager);
         myViewPager.setPageMargin((int) (getResources().getDisplayMetrics().density * 15));
+
+        myViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                countTxt.setText("" + (position+1)+"/" + allCount);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         myViewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
