@@ -51,16 +51,10 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:layout_gravity="start"
-            android:background="#ffffff"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="sdfsfsfsdfsdfsdf"
-                android:layout_gravity="center"
-                android:textColor="#333333"
-                android:textSize="15dp"
-                />
+
+
+            <include layout="@layout/drawer_layout_left" />
 
         </LinearLayout>
         <!--侧滑菜单区域 ending-->
