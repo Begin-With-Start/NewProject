@@ -62,7 +62,9 @@ public class MainActivity extends BaseActivity{
 
         // 设置ViewPager的数据等
         setupViewPager();
-
+        /**
+         * JCVideoPlayerStandard.setUp("file:///sdcard/Wildlife.wmv", JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,"本地播放");
+         */
     }
 
 
