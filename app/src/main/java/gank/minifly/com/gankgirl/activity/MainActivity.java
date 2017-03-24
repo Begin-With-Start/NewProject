@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.activity_project;
+package gank.minifly.com.gankgirl.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -25,9 +25,9 @@ import gank.minifly.com.gankgirl.bean.RequestExpressBean;
 import gank.minifly.com.gankgirl.common.http.OnLoadListener;
 import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
 import gank.minifly.com.gankgirl.common.tools.LogUtils;
-import gank.minifly.com.gankgirl.fragment_project.MainOtherFragment;
-import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
-import gank.minifly.com.gankgirl.fragment_project.MainVideoFragment;
+import gank.minifly.com.gankgirl.fragment.MainOtherFragment;
+import gank.minifly.com.gankgirl.fragment.MainPhotoFragment;
+import gank.minifly.com.gankgirl.fragment.MainVideoFragment;
 
 public class MainActivity extends BaseActivity{
 

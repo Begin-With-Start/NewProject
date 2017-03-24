@@ -103,14 +103,17 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
     protected int mGestureDownVolume;
     protected float mGestureDownBrightness;
     protected int mSeekTimePosition;
+    private Context mContext;
 
     public JCVideoPlayer(Context context) {
         super(context);
+        mContext = context;
         init(context);
     }
 
     public JCVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         init(context);
     }
 

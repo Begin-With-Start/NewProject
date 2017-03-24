@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.activity_project;
+package gank.minifly.com.gankgirl.activity;
 
 import android.app.Activity;
 import android.app.Dialog;

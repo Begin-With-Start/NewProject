@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.fragment_project;
+package gank.minifly.com.gankgirl.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gank.minifly.com.gankgirl.R;
-import gank.minifly.com.gankgirl.activity_project.PhotoGankViewdetailActivity;
+import gank.minifly.com.gankgirl.activity.PhotoGankViewdetailActivity;
 import gank.minifly.com.gankgirl.adapter.PhotoAdapter;
 import gank.minifly.com.gankgirl.adapter.SpacesItemDecoration;
 import gank.minifly.com.gankgirl.bean.FuliRequestBean;

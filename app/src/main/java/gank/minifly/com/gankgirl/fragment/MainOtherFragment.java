@@ -1,4 +1,4 @@
-package gank.minifly.com.gankgirl.fragment_project;
+package gank.minifly.com.gankgirl.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
