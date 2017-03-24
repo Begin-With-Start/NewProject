@@ -44,7 +44,7 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
         holder.jcVideoPlayer.thumbImageView.setTag(mVideoUrl);
         //从缓存中获取图片
         Bitmap bitmap = frameImageLoader.showCacheBitmap(VideoFrameImageLoader.formatVideoUrl(mVideoUrl));
-        if (bitmap != null) {
+        if (bitmap != null && mVideoUrl.equals(holder.jcVideoPlayer.thumbImageView.getTag()) ) {
             holder.jcVideoPlayer.thumbImageView.setImageBitmap(bitmap);
         } else {
             //没有从缓存中加载到时，先设置一张默认图

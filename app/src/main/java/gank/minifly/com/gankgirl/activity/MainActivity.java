@@ -188,8 +188,6 @@ public class MainActivity extends BaseActivity{
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
 
         // 如果没有的话就提示退出
@@ -200,6 +198,7 @@ public class MainActivity extends BaseActivity{
         }
         finish();
         super.onBackPressed();
+
     }
 
 }
