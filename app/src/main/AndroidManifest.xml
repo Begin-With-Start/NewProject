@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".activity.PhotoGankViewdetailActivity"
+            android:name=".activity.PhotoGankViewPhotodetailActivity"
             android:label="@string/title_activity_photo_gank_viewdetail"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

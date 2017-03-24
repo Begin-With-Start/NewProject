@@ -191,6 +191,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
                 Log.d(TAG, "toFullscreenActivity [" + this.hashCode() + "] ");
                 onEvent(JCUserAction.ON_ENTER_FULLSCREEN);
                 startWindowFullscreen();
+//                startFullscreen(mContext,JCVideoPlayerStandard.class,url,"默认标题");
             }
         } else if (i == R.id.surface_container && currentState == CURRENT_STATE_ERROR) {
             Log.i(TAG, "onClick surfaceContainer State=Error [" + this.hashCode() + "] ");

@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gank.minifly.com.gankgirl.R;
-import gank.minifly.com.gankgirl.activity.PhotoGankViewdetailActivity;
+import gank.minifly.com.gankgirl.activity.PhotoGankViewPhotodetailActivity;
 import gank.minifly.com.gankgirl.adapter.PhotoAdapter;
 import gank.minifly.com.gankgirl.adapter.SpacesItemDecoration;
 import gank.minifly.com.gankgirl.bean.FuliRequestBean;
@@ -101,7 +101,7 @@ public class MainPhotoFragment extends BaseFragment implements View.OnClickListe
 
                 bundle.putParcelable("bean",tempBean);
 
-                startActivity(PhotoGankViewdetailActivity.class,bundle);
+                startActivity(PhotoGankViewPhotodetailActivity.class,bundle);
             }
         });
         photoFragmentRecyclerview.setAdapter(adapter);

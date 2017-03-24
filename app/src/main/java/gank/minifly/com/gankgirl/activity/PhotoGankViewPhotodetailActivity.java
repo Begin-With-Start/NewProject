@@ -19,7 +19,7 @@ import gank.minifly.com.gankgirl.common.imageloader.ImageloaderEngin;
 import gank.minifly.com.gankgirl.common.imageloader.ImageloaderPoxyImp;
 import gank.minifly.com.gankgirl.common.tools.ScreenUtils;
 
-public class PhotoGankViewdetailActivity extends BaseActivity {
+public class PhotoGankViewPhotodetailActivity extends BaseActivity {
     private ViewPager myViewPager;
     private TextView countTxt;
     private Context mContext;
@@ -90,7 +90,7 @@ public class PhotoGankViewdetailActivity extends BaseActivity {
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
                 FuliResponseBean.ResultsBean bean = list.get(position);
-                PhotoView view = new PhotoView(PhotoGankViewdetailActivity.this);
+                PhotoView view = new PhotoView(PhotoGankViewPhotodetailActivity.this);
                 view.enable();
                 view.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 ImageloaderPoxyImp.getInstance().setLoader(new ImageloaderEngin(mContext)).displayImage(bean.getUrl(),view);//+"?imageView2/0/w/"+ imageWidth
