@@ -4,8 +4,14 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.yolanda.nohttp.NoHttp;
@@ -21,25 +27,38 @@ import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
 import gank.minifly.com.gankgirl.common.tools.LogUtils;
 import gank.minifly.com.gankgirl.fragment_project.MainOtherFragment;
 import gank.minifly.com.gankgirl.fragment_project.MainPhotoFragment;
+import gank.minifly.com.gankgirl.fragment_project.MainVideoFragment;
 
 public class MainActivity extends BaseActivity{
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private long mExitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         init();
     }
 
     public void init(){
+
         tabLayout = (TabLayout) findViewById(R.id.main_tab_all_id);
         mViewPager = (ViewPager) findViewById(R.id.main_viewpager_id);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar.setTitle("资料总汇");
+        //设置toolbar
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,0,0);
+        drawerLayout.addDrawerListener(toggle);//设置监听
+        toggle.syncState();//加上同步
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
         // 设置ViewPager的数据等
         setupViewPager();
@@ -59,6 +78,8 @@ public class MainActivity extends BaseActivity{
             public Fragment getItem(int position) {
                 if(position==0){
                     return new MainPhotoFragment();
+                }else if(position == 1){
+                    return new MainVideoFragment();
                 }else{
                     return new MainOtherFragment();
                 }
@@ -68,6 +89,8 @@ public class MainActivity extends BaseActivity{
             public CharSequence getPageTitle(int position) {
                 if(position==0){
                     return "妹纸图";
+                }else if(position == 1){
+                    return "视频";
                 }else{
                     return "标题";
                 }
@@ -137,5 +160,44 @@ public class MainActivity extends BaseActivity{
             showProgressDialog();
         }
     };
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
+        // 如果没有的话就提示退出
+        if (System.currentTimeMillis() - mExitTime > 2000) {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+            return;
+        }
+        finish();
+        super.onBackPressed();
+    }
 
 }

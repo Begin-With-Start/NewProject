@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import gank.minifly.com.gankgirl.R;
-import gank.minifly.com.gankgirl.activity_project.VideoGankViewDetailActivity;
 
 /**
  * author ：minifly
@@ -41,7 +40,6 @@ public class MainOtherFragment extends BaseFragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.main_activity_other_up_arrow_but:
-                startActivity(VideoGankViewDetailActivity.class,null);
                 break;
         }
     }
