@@ -17,4 +17,13 @@ public class UrlConstant {
     public static final String FULI_URL = GANK_BASE_URL + "data/%E7%A6%8F%E5%88%A9/10";// /1来取第几页
 
 
+    public static final String MY_SERVER_BASE_URL = "http://localhost:8080/DataServer/";
+
+    /**
+     * 获取主页的信息
+     */
+    public static final String MAINPAGE_URL_IMAGE = MY_SERVER_BASE_URL + "info/getMainPage";
+
+
+
 }
