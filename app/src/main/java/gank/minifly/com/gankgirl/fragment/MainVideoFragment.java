@@ -9,11 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
+
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerManager;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.adapter.AcitivityVideoviewListAdapter;
+import gank.minifly.com.gankgirl.bean.FuliRequestBean;
+import gank.minifly.com.gankgirl.bean.FuliResponseBean;
 import gank.minifly.com.gankgirl.common.customer_widget.VideoFrameImageLoader;
+import gank.minifly.com.gankgirl.common.http.OnLoadListener;
+import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
+import gank.minifly.com.gankgirl.common.tools.LogUtils;
+import gank.minifly.com.gankgirl.constant.UrlConstant;
 
 /**
  * author ：minifly
@@ -24,7 +36,7 @@ import gank.minifly.com.gankgirl.common.customer_widget.VideoFrameImageLoader;
 public class MainVideoFragment extends BaseFragment {
     private View view;
     private Context mContext;
-
+    private int currentPage = 0;
     private RecyclerView recyclerView;
     AcitivityVideoviewListAdapter adapterVideoList;
 
@@ -78,9 +90,60 @@ public class MainVideoFragment extends BaseFragment {
         });
 
 //        JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class, "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "嫂子辛苦了");
-
+        request(currentPage+"");
+    }
+    public void request(String pageNum) {
+        String url = UrlConstant.FULI_URL + "/" + pageNum;// /1来取第几页
+        FuliRequestBean requestData = new FuliRequestBean();
+        requestData.setRequestUrl(url);
+        Request<String> request = NohttpEngin.getRequest(requestData,NohttpEngin.METHOD_GET);
+        requestQueue = NoHttp.newRequestQueue();
+        requestQueue.add(1, request, onResponseListener);
     }
 
+
+    OnResponseListener<String> onResponseListener = new OnLoadListener<String>() {
+
+        @Override
+        public void onSuccess(int what, Response<String> response) {
+//            LogUtils.showErrLog("" + response.get());
+            currentPage++;
+            switch (what) {
+                case 1:
+                    try {
+                        FuliResponseBean resoureseBean = JSON.parseObject(response.get(), FuliResponseBean.class);
+                        if(!resoureseBean.isError()){
+
+                        }else{
+                            showToast("查询失败");
+                        }
+                    } catch (Exception e) {
+                        showToast("数据解析异常");
+                    }
+                    break;
+
+            }
+
+
+        }
+
+        @Override
+        public void onError(int what, Response<String> response) {
+
+        }
+
+        @Override
+        public void onFinish(int what) {
+            super.onFinish(what);
+            hideProgressDialog();
+        }
+
+        @Override
+        public void onStart(int what) {
+            super.onStart(what);
+            showProgressDialog("请求中.");
+        }
+    };
     @Override
     public void onStop() {
         super.onStop();

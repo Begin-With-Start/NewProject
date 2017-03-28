@@ -16,5 +16,6 @@ public class UrlConstant {
     public static final String GANK_BASE_URL = "http://www.gank.io/api/";
     public static final String FULI_URL = GANK_BASE_URL + "data/%E7%A6%8F%E5%88%A9/10";// /1来取第几页
 
+    
 
 }
