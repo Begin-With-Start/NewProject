@@ -17,6 +17,7 @@ import com.yolanda.nohttp.rest.Response;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerManager;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.adapter.AcitivityVideoviewListAdapter;
 import gank.minifly.com.gankgirl.bean.FuliRequestBean;
@@ -24,6 +25,7 @@ import gank.minifly.com.gankgirl.bean.FuliResponseBean;
 import gank.minifly.com.gankgirl.common.customer_widget.VideoFrameImageLoader;
 import gank.minifly.com.gankgirl.common.http.OnLoadListener;
 import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
+import gank.minifly.com.gankgirl.common.tools.LogUtils;
 import gank.minifly.com.gankgirl.constant.UrlConstant;
 
 /**
@@ -54,7 +56,7 @@ public class MainVideoFragment extends BaseFragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.video_gankeview_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
-        String [] videoUrls = {
+        final String [] videoUrls = {
                 "http://video.jiecao.fm/8/17/bGQS3BQQWUYrlzP1K4Tg4Q__.mp4",
                 "http://video.jiecao.fm/8/17/%E6%8A%AB%E8%90%A8.mp4",
                 "http://video.jiecao.fm/8/18/%E5%A4%A7%E5%AD%A6.mp4",
@@ -69,6 +71,14 @@ public class MainVideoFragment extends BaseFragment {
 
         VideoFrameImageLoader mVideoFrameImageLoader = new VideoFrameImageLoader(mContext, recyclerView, videoUrls);
         adapterVideoList = new AcitivityVideoviewListAdapter(mContext,mVideoFrameImageLoader);
+
+        adapterVideoList.setItemOclick(new AcitivityVideoviewListAdapter.ItemOclick() {
+            @Override
+            public void itemClick(int position) {
+                LogUtils.showErrLog("点击事件");
+                JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class, videoUrls[position], "嫂子辛苦了");
+            }
+        });
 
         recyclerView.setAdapter(adapterVideoList);
         recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {

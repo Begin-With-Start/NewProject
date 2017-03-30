@@ -6,13 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.common.customer_widget.VideoFrameImageLoader;
-import gank.minifly.com.gankgirl.common.tools.LogUtils;
 
 public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<AcitivityVideoviewListAdapter.MyViewHolder> {
 
@@ -35,7 +33,7 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         if (isFirst) {
             frameImageLoader.initList();
@@ -53,19 +51,21 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
             holder.jcVideoPlayer.thumbImageView.setImageResource(R.drawable.video_defult);
         }
 
+        //截取所有的请求直接在新的页面进行播放.
+
+        if(itemOclick!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    itemOclick.itemClick(position);
+                }
+            });
+        }
+
         holder.jcVideoPlayer.setUp(
                 mVideoUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST,
                 "都用一个先吧");
 
-
-        //截取所有的请求直接在新的页面进行播放.
-        holder.jcVideoPlayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LogUtils.showErrLog("点击了...视频的东西.");
-                JCVideoPlayerStandard.startFullscreen(context, JCVideoPlayerStandard.class, "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "嫂子辛苦了");
-            }
-        });
     }
 
     @Override
@@ -75,13 +75,21 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         JCVideoPlayerStandard jcVideoPlayer;
-        LinearLayout jcVideoLin;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            jcVideoLin = (LinearLayout) itemView.findViewById(R.id.video_gankview_video_lin);
             jcVideoPlayer = (JCVideoPlayerStandard) itemView.findViewById(R.id.video_gankview_videoplayer);
         }
+    }
+
+    public interface ItemOclick{
+        void itemClick(int position);
+    }
+
+    ItemOclick itemOclick;
+
+    public void setItemOclick(ItemOclick itemOclick){
+        this.itemOclick = itemOclick;
     }
 
 }
