@@ -9,5 +9,13 @@ import gank.minifly.com.gankgirl.common.http.http_oo.HttpRequestData;
  * desc:
  */
 public class FuliRequestBean extends HttpRequestData {
+    private String page;
 
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
 }

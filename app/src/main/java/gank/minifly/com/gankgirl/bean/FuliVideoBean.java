@@ -6,34 +6,48 @@ import java.util.List;
  * Created by minifly on 2017-03-28.
  */
 
-public class FuliVideoBean extends BaseBean{
-    private List<ResultsBean> results;
+public class FuliVideoBean {
+    private String code;
 
-    public List<ResultsBean> getResults() {
-        return results;
-    }
+    private String msg;
 
-    public void setResults(List<ResultsBean> results) {
-        this.results = results;
+    private List<Data> data ;
+
+    public void setCode(String code){
+        this.code = code;
     }
-    public class ResultsBean{
+    public String getCode(){
+        return this.code;
+    }
+    public void setMsg(String msg){
+        this.msg = msg;
+    }
+    public String getMsg(){
+        return this.msg;
+    }
+    public void setData(List<Data> data){
+        this.data = data;
+    }
+    public List<Data> getData(){
+        return this.data;
+    }
+    public class Data {
         private String description;
+
         private String url;
 
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
+        public void setDescription(String description){
             this.description = description;
         }
-
-        public String getUrl() {
-            return url;
+        public String getDescription(){
+            return this.description;
         }
-
-        public void setUrl(String url) {
+        public void setUrl(String url){
             this.url = url;
         }
+        public String getUrl(){
+            return this.url;
+        }
+
     }
 }

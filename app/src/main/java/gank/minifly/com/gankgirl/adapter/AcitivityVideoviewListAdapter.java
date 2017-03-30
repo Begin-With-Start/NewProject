@@ -18,10 +18,12 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
     private VideoFrameImageLoader frameImageLoader;
     private boolean isFirst = true;
     private String [] videoUrls;
-    public AcitivityVideoviewListAdapter(Context context,VideoFrameImageLoader vfi) {
+    private String [] videoNames;
+    public AcitivityVideoviewListAdapter(Context context,VideoFrameImageLoader vfi,String [] videoNames) {
         this.context = context;
         this.frameImageLoader = vfi;
         videoUrls = frameImageLoader.getVideoUrls();
+        this.videoNames = videoNames;
     }
 
     @Override
@@ -41,6 +43,8 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
         }
 
         String mVideoUrl = videoUrls[position];
+        String name = videoNames[position];
+
         holder.jcVideoPlayer.thumbImageView.setTag(mVideoUrl);
         //从缓存中获取图片
         Bitmap bitmap = frameImageLoader.showCacheBitmap(VideoFrameImageLoader.formatVideoUrl(mVideoUrl));
@@ -53,7 +57,7 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
 
         holder.jcVideoPlayer.setUp(
                 mVideoUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST,
-                "都用一个先吧");
+                name);
 
     }
 

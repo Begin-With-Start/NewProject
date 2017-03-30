@@ -18,13 +18,16 @@ public class UrlConstant {
 
     
 
-    public static final String MY_SERVER_BASE_URL = "http://localhost:8080/DataServer/";
+    public static final String MY_SERVER_BASE_URL = "http://115.181.89.102/DataServer/";
 
     /**
      * 获取主页的信息
      */
     public static final String MAINPAGE_URL_IMAGE = MY_SERVER_BASE_URL + "info/getMainPage";
 
-
+    /**
+     * 获取视频信息
+     */
+    public static final String MAIN_VIDEO_URL = MY_SERVER_BASE_URL + "meizhi/getMeizhiVideo";
 
 }
