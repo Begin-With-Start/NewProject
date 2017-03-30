@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity{
 
     public void init(){
 
+
         tabLayout = (TabLayout) findViewById(R.id.main_tab_all_id);
         mViewPager = (ViewPager) findViewById(R.id.main_viewpager_id);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

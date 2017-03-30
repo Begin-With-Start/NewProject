@@ -35,7 +35,7 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         if (isFirst) {
             frameImageLoader.initList();
@@ -53,6 +53,17 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
         } else {
             //没有从缓存中加载到时，先设置一张默认图
             holder.jcVideoPlayer.thumbImageView.setImageResource(R.drawable.video_defult);
+        }
+
+        //截取所有的请求直接在新的页面进行播放.
+
+        if(itemOclick!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    itemOclick.itemClick(position);
+                }
+            });
         }
 
         holder.jcVideoPlayer.setUp(
@@ -73,6 +84,16 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
             super(itemView);
             jcVideoPlayer = (JCVideoPlayerStandard) itemView.findViewById(R.id.video_gankview_videoplayer);
         }
+    }
+
+    public interface ItemOclick{
+        void itemClick(int position);
+    }
+
+    ItemOclick itemOclick;
+
+    public void setItemOclick(ItemOclick itemOclick){
+        this.itemOclick = itemOclick;
     }
 
 }

@@ -5,30 +5,49 @@
     android:background="#ffffff"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/person"
-        />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/nav_header"
+
+        android:layout_height="160dp">
+<!--
+
+        <ImageView
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/person"
+            />
+-->
+
+    </RelativeLayout>
     <View
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:background="#e5e5e5"
         android:layout_height="0.5dp"/>
     
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/drawer_setting_rel_1"
         android:layout_width="match_parent"
         android:background="@drawable/btn_selector"
         android:clickable="true"
         android:layout_height="45dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:src="@drawable/ic_settings_black_24dp"
+            />
+
         <TextView
             android:id="@+id/drawer_setting_text_1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:text="设置"
             android:paddingLeft="15dp"
@@ -36,59 +55,15 @@
             android:textSize="17dp"
             android:gravity="center_vertical"
             android:textColor="#2a2a2a"
+
             />
-    </RelativeLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:background="#e5e5e5"
         android:layout_height="0.5dp"/>
 
-    <RelativeLayout
-        android:id="@+id/drawer_setting_rel_2"
-        android:layout_width="match_parent"
-        android:background="@drawable/btn_selector"
-        android:clickable="true"
-        android:layout_height="45dp">
-        <TextView
-            android:id="@+id/drawer_setting_text_2"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:text="设置"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textSize="17dp"
-            android:gravity="center_vertical"
-            android:textColor="#2a2a2a"
-            />
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:background="#e5e5e5"
-        android:layout_height="0.5dp"/>
-
-    <RelativeLayout
-        android:id="@+id/drawer_setting_rel_3"
-        android:layout_width="match_parent"
-        android:background="@drawable/btn_selector"
-        android:clickable="true"
-        android:layout_height="45dp">
-        <TextView
-            android:id="@+id/drawer_setting_text_3"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:text="设置"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textSize="17dp"
-            android:gravity="center_vertical"
-            android:textColor="#2a2a2a"
-            />
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:background="#e5e5e5"
-        android:layout_height="0.5dp"/>
 
     
     <RelativeLayout
