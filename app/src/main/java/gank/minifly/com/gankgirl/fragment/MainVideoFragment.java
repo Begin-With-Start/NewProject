@@ -24,7 +24,6 @@ import gank.minifly.com.gankgirl.bean.FuliResponseBean;
 import gank.minifly.com.gankgirl.common.customer_widget.VideoFrameImageLoader;
 import gank.minifly.com.gankgirl.common.http.OnLoadListener;
 import gank.minifly.com.gankgirl.common.http.http_oo.NohttpEngin;
-import gank.minifly.com.gankgirl.common.tools.LogUtils;
 import gank.minifly.com.gankgirl.constant.UrlConstant;
 
 /**
@@ -156,5 +155,10 @@ public class MainVideoFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

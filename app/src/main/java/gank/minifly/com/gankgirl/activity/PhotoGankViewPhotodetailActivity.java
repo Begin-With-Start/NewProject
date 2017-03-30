@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bm.library.PhotoView;
-
 import java.util.List;
 
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.bean.FuliResponseBean;
 import gank.minifly.com.gankgirl.common.imageloader.ImageloaderEngin;
 import gank.minifly.com.gankgirl.common.imageloader.ImageloaderPoxyImp;
+import gank.minifly.com.gankgirl.common.photoview.PhotoView;
 import gank.minifly.com.gankgirl.common.tools.ScreenUtils;
 
 public class PhotoGankViewPhotodetailActivity extends BaseActivity {
