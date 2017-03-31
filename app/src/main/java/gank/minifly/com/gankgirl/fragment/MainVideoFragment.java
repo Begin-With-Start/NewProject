@@ -3,6 +3,7 @@ package gank.minifly.com.gankgirl.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +25,6 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.adapter.AcitivityVideoviewListAdapter;
 import gank.minifly.com.gankgirl.bean.FuliRequestBean;
-import gank.minifly.com.gankgirl.bean.FuliResponseBean;
 import gank.minifly.com.gankgirl.bean.FuliVideoBean;
 import gank.minifly.com.gankgirl.common.customer_widget.VideoFrameImageLoader;
 import gank.minifly.com.gankgirl.common.http.OnLoadListener;
@@ -43,9 +43,14 @@ public class MainVideoFragment extends BaseFragment {
     private Context mContext;
     private int currentPage = 0;
     private RecyclerView recyclerView;
-    AcitivityVideoviewListAdapter adapterVideoList;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private AcitivityVideoviewListAdapter adapterVideoList;
+
+
     private String[] videoUrls;
     private String[] names;
+    private List<String> videoStrList = new LinkedList<>();
+    private List<String> nameStrList = new LinkedList<>();
 
     @Nullable
     @Override
@@ -59,6 +64,7 @@ public class MainVideoFragment extends BaseFragment {
     public void initView(){
         mContext = getContext();
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.photo_fragment_swipe_refresh_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.video_gankeview_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
@@ -74,19 +80,32 @@ public class MainVideoFragment extends BaseFragment {
                 "http://gslb.miaopai.com/stream/ed5HCfnhovu3tyIQAiv60Q__.mp4",
                 "http://video.jiecao.fm/11/23/xu/%E5%A6%B9%E5%A6%B9.mp4"
         };
+        final String [] names = {
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧",
+                "先用这个吧"
+        };
 
         VideoFrameImageLoader mVideoFrameImageLoader = new VideoFrameImageLoader(mContext, recyclerView, videoUrls);
-        adapterVideoList = new AcitivityVideoviewListAdapter(mContext,mVideoFrameImageLoader,null);
+        adapterVideoList = new AcitivityVideoviewListAdapter(mContext,mVideoFrameImageLoader,names);
 
         adapterVideoList.setItemOclick(new AcitivityVideoviewListAdapter.ItemOclick() {
             @Override
             public void itemClick(int position) {
                 LogUtils.showErrLog("点击事件");
-                JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class, videoUrls[position], "嫂子辛苦了");
+                JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class, videoUrls[position], names[position]);
             }
         });
 
         recyclerView.setAdapter(adapterVideoList);
+        //视频滑动到屏幕外，直接将所有的视频停止.
         recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
             public void onChildViewAttachedToWindow(View view) {
@@ -104,8 +123,46 @@ public class MainVideoFragment extends BaseFragment {
             }
         });
 
-//        JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class, "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "嫂子辛苦了");
-        request(currentPage+"");
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener(){
+            //用来标记是否正在向最后一个滑动，既是否向下滑动
+            boolean isSlidingToLast = false;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                // 当不滚动时
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //获取最后一个完全显示的ItemPosition
+                    int lastVisiblePos = manager.findLastVisibleItemPosition();
+                    int totalItemCount = manager.getItemCount();
+
+                    // 判断是否滚动到底部
+                    if (lastVisiblePos == (totalItemCount -1) && isSlidingToLast) {
+                        //加载更多功能的代码
+                        showToast("滚动到底部了.");
+//                        request("" + currentPageNum);
+//                        mySwipeRefreshLayout.setRefreshing(true);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //dx用来判断横向滑动方向，dy用来判断纵向滑动方向
+                if(dy > 0){
+                    //大于0表示，正在向下滚动
+                    isSlidingToLast = true;
+                }else{
+                    //小于等于0 表示停止或向上滚动
+                    isSlidingToLast = false;
+                }
+
+            }
+        });
+
+//        request(currentPage+"");
     }
     public void request(String pageNum) {
         String url = UrlConstant.MAIN_VIDEO_URL;// /1来取第几页
@@ -127,41 +184,23 @@ public class MainVideoFragment extends BaseFragment {
             switch (what) {
                 case 1:
                     try {
-                        List<String > videoList = new LinkedList<>();
-                        List<String > nameList = new LinkedList<>();
-                        videoList.toArray();
                         FuliVideoBean resoureseBean = JSON.parseObject(response.get(), FuliVideoBean.class);
+
                         if(resoureseBean.getCode().equals("0")){
                             for(FuliVideoBean.Data bean : resoureseBean.getData()){
-                                videoList.add(bean.getUrl());
-                                nameList.add(bean.getDescription().substring(0,15));
+                                videoStrList.add(bean.getUrl());//每次的请求都向list中添加新的数据.
+                                nameStrList.add(bean.getDescription().substring(0,15));
                             }
                             videoUrls = new String[resoureseBean.getData().size()];
                             names = new String[resoureseBean.getData().size()];
 
-                            videoList.toArray(videoUrls);
-                            nameList.toArray(names);
+                            videoStrList.toArray(videoUrls);
+                            nameStrList.toArray(names);
 
                             VideoFrameImageLoader mVideoFrameImageLoader = new VideoFrameImageLoader(mContext, recyclerView, videoUrls);
                             adapterVideoList = new AcitivityVideoviewListAdapter(mContext,mVideoFrameImageLoader,names);
+                            adapterVideoList.notifyDataSetChanged();
 
-                            recyclerView.setAdapter(adapterVideoList);
-                            recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
-                                @Override
-                                public void onChildViewAttachedToWindow(View view) {
-
-                                }
-
-                                @Override
-                                public void onChildViewDetachedFromWindow(View view) {//当这个控件滑动到屏幕之外的地方.
-                                    if (JCVideoPlayerManager.getFirstFloor() != null) {
-                                        JCVideoPlayer videoPlayer = JCVideoPlayerManager.getFirstFloor();
-                                        if (((ViewGroup) view).indexOfChild(videoPlayer) != -1 && videoPlayer.currentState == JCVideoPlayer.CURRENT_STATE_PLAYING) {
-                                            JCVideoPlayer.releaseAllVideos();
-                                        }
-                                    }
-                                }
-                            });
                         }else{
                             showToast("查询失败");
                         }
@@ -185,14 +224,29 @@ public class MainVideoFragment extends BaseFragment {
         public void onFinish(int what) {
             super.onFinish(what);
             hideProgressDialog();
+            swipeRefreshLayout.setRefreshing(false);
         }
 
         @Override
         public void onStart(int what) {
             super.onStart(what);
             showProgressDialog("请求中.");
+            swipeRefreshLayout.setRefreshing(true);
+
         }
     };
+
+    private int getMaxElem(int[] arr) {
+        int size = arr.length;
+        int maxVal = Integer.MIN_VALUE;
+        for (int i = 0; i < size; i++) {
+            if (arr[i]>maxVal)
+                maxVal = arr[i];
+        }
+        return maxVal;
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();
@@ -200,6 +254,7 @@ public class MainVideoFragment extends BaseFragment {
             return;
         }
     }
+
 
     @Override
     public void onPause() {

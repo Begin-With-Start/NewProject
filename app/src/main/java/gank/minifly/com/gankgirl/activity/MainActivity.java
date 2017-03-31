@@ -19,6 +19,7 @@ import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.bean.ExcepressBean;
 import gank.minifly.com.gankgirl.bean.RequestExpressBean;
@@ -189,6 +190,11 @@ public class MainActivity extends BaseActivity{
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }
+
+
+        if (JCVideoPlayer.backPress()) {//如果正在播放视频的话，先返回到列表页中.
+            return;
         }
 
         // 如果没有的话就提示退出

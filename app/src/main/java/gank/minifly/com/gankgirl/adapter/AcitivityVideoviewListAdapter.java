@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import gank.minifly.com.gankgirl.R;
 import gank.minifly.com.gankgirl.common.customer_widget.VideoFrameImageLoader;
 
@@ -24,6 +24,11 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
         this.frameImageLoader = vfi;
         videoUrls = frameImageLoader.getVideoUrls();
         this.videoNames = videoNames;
+    }
+
+    public void setVideoNames(String [] videoNames){
+        this.videoNames = videoNames;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -45,17 +50,17 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
         String mVideoUrl = videoUrls[position];
         String name = videoNames[position];
 
-        holder.jcVideoPlayer.thumbImageView.setTag(mVideoUrl);
+        holder.jcVideoPlayer.setTag(mVideoUrl);
         //从缓存中获取图片
         Bitmap bitmap = frameImageLoader.showCacheBitmap(VideoFrameImageLoader.formatVideoUrl(mVideoUrl));
-        if (bitmap != null && mVideoUrl.equals(holder.jcVideoPlayer.thumbImageView.getTag()) ) {
-            holder.jcVideoPlayer.thumbImageView.setImageBitmap(bitmap);
+        if (bitmap != null && mVideoUrl.equals(holder.jcVideoPlayer.getTag()) ) {
+            holder.jcVideoPlayer.setImageBitmap(bitmap);
         } else {
             //没有从缓存中加载到时，先设置一张默认图
-            holder.jcVideoPlayer.thumbImageView.setImageResource(R.drawable.video_defult);
+            holder.jcVideoPlayer.setImageResource(R.drawable.video_defult);
         }
 
-        //截取所有的请求直接在新的页面进行播放.
+        holder.titleTxt.setText(name);
 
         if(itemOclick!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener(){
@@ -64,11 +69,19 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
                     itemOclick.itemClick(position);
                 }
             });
+            holder.jcVideoPlayImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemOclick.itemClick(position);
+                }
+            });
+            holder.jcVideoPlayImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemOclick.itemClick(position);
+                }
+            });
         }
-
-        holder.jcVideoPlayer.setUp(
-                mVideoUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST,
-                name);
 
     }
 
@@ -78,11 +91,15 @@ public class AcitivityVideoviewListAdapter extends RecyclerView.Adapter<Acitivit
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        JCVideoPlayerStandard jcVideoPlayer;
+        ImageView jcVideoPlayer;
+        TextView titleTxt;
+        ImageView jcVideoPlayImg;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            jcVideoPlayer = (JCVideoPlayerStandard) itemView.findViewById(R.id.video_gankview_videoplayer);
+            jcVideoPlayImg = (ImageView) itemView.findViewById(R.id.video_gankview_play_img);
+            titleTxt = (TextView) itemView.findViewById(R.id.video_gankview_title);
+            jcVideoPlayer = (ImageView) itemView.findViewById(R.id.video_gankview_img);
         }
     }
 
